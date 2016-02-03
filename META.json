@@ -42,6 +42,10 @@
       },
       "runtime" : {
          "requires" : {
+            "HTTP::Headers" : "0",
+            "HTTP::Request" : "0",
+            "JSON" : "0",
+            "LWP::UserAgent" : "0",
             "perl" : "5.008001"
          }
       },
@@ -52,6 +56,11 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "repository" : {
+         "url" : "ssh://sys_cat@git_550909:29418/sys_cat/WebService-Azure-Search.git"
+      }
+   },
    "version" : "0.01",
    "x_serialization_backend" : "JSON::PP version 2.27203"
 }
