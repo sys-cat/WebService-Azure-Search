@@ -3,9 +3,35 @@ use 5.008001;
 use strict;
 use warnings;
 
+use Class::Accessor::Lite (
+  new => 1,
+  rw => [qw/_init update delete/]
+  ro => [qw/select/]
+);
+
+use JSON:
+use HTTP::Request;
+use HTTP::Headers;
+use URI;
+
 our $VERSION = "0.01";
 
+sub new {
+  my ($class, %opts) = @_;
+  my $self = bless {%opts}, $class;
+  $self->_init($self);
+}
 
+sub _init {
+}
+
+sub _query {}
+
+sub select {}
+
+sub update {}
+
+sub delete {}
 
 1;
 __END__
