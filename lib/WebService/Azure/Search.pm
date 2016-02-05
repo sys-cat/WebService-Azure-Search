@@ -16,6 +16,10 @@ use Try::Tiny;
 use Carp;
 
 our $VERSION = "0.01";
+our $SELECT = "select";
+our $INPUT = "input";
+our $UPDATE = "update";
+our $DELETE = "delete";
 
 sub new {
   my ($class, %opts) = @_;
@@ -45,6 +49,8 @@ sub _init {
     $self->{setting}{admin} = $self->{admin};
   }
 
+  $self->{params}{accept} = "application/json";
+
   try {
     $self->{params}{url} = sprintf(
       "%s/indexes/%s/docs/index?api-version=%s",
@@ -57,9 +63,67 @@ sub _init {
   };
 }
 # select, insert, update, delete　のメソッドはパラメーターを作るだけ
+sub select {
+  my ($self, %params) = @_;
+  my $params = bless {%params};
+
+  $self->{params}{url} = undef;
+  try {
+    # Create URL for SELECT
+    $self->{params}{url} = sprintf(
+      "%s/indexes/%s/docs/search?api-version=%s",
+      $self->{setting}{base},
+      $self->{setting}{index},
+      $self->{setting}{api}
+    );
+  } catch {
+    carp "cant't create request url for SELECT. detail : $_";
+  }
+
+  # Set value
+  $self->{params}{query}{search} = undef;
+  if ($params->{search}) {
+    $self->{params}{query}{search} = $params->{search};
+  }
+  $self->{params}{query}{searchMode} = "any"; # default is 'any'
+  if ($params->{searchMode}) {
+    $self->{params}{query}{searchMode} = $params->{searchMode};
+  }
+  $self->{params}{query}{searchFields} = undef;
+  if ($params->{searchFields}) {
+    $self->{params}{query}{searchFields} = join($params->{searchFields}, ",");
+  }
+  $self->{params}{query}{count} = "false";
+  if ($params->{count}) {
+    $self->{params}{query}{count} = $params->{count};
+  }
+  $self->{params}{query}{api} = $self->{setting}{api};
+}
+
+sub insert {
+  my ($self, @params) = @_;
+  $self->{params}{query}{value} = @params;
+  $self->{params}{query}{api} = $self->{setting}{api};
+}
+
+sub update {
+  my ($self, @params) = @_;
+  $self->{params}{query}{value} = @params;
+  $self->{params}{query}{api} = $self->{setting}{api};
+}
+
+sub delete {
+  my ($self, @params) = @_;
+  $self->{params}{query}{value} = @params;
+  $self->{params}{query}{api} = $self->{setting}{api};
+}
+
 # 最終的なリクエストは run に任せる
 # run はHTTPリクエストして返すだけ
-sub query {
+sub run {
+  my ($self) = @_;
+  my $uri = URI->new($self->{params}{url});
+  $uri->query_form($self->{params}{query});
 }
 
 1;
