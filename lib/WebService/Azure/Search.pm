@@ -78,7 +78,7 @@ sub select {
       "%s/indexes/%s/docs/search?api-version=%s",
       $self->{setting}{base},
       $self->{setting}{index},
-      $self->{setting}{api}
+      $self->{setting}{api},
     );
   } catch {
     carp "cant't create request url for SELECT. detail : $_";
