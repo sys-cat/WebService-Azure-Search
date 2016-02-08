@@ -6,7 +6,7 @@ use utf8;
 
 use Class::Accessor::Lite (
   new => 0,
-  rw => [qw/_init query/]
+  #rw => [qw/_init query/]
 );
 
 use JSON;
