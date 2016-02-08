@@ -60,6 +60,7 @@ sub _init {
       $self->{setting}{index},
       $self->{setting}{api}
     );
+    return $self;
   } catch {
     carp "can't create request url.detail : $_";
   };
