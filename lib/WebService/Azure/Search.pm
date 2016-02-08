@@ -12,6 +12,7 @@ use Class::Accessor::Lite (
 use JSON:
 use HTTP::Request;
 use HTTP::Headers;
+use LWP::UserAgent;
 use URI;
 use Try::Tiny;
 use Carp;
