@@ -71,19 +71,6 @@ sub select {
   my ($self, %params) = @_;
   my $params = bless {%params};
 
-  $self->{params}{url} = undef;
-  try {
-    # Create URL for SELECT
-    $self->{params}{url} = sprintf(
-      "%s/indexes/%s/docs/search?api-version=%s",
-      $self->{setting}{base},
-      $self->{setting}{index},
-      $self->{setting}{api},
-    );
-  } catch {
-    carp "cant't create request url for SELECT. detail : $_";
-  }
-
   # Set value
   $self->{params}{query}{search} = undef;
   if ($params->{search}) {
@@ -102,6 +89,20 @@ sub select {
     $self->{params}{query}{count} = $params->{count};
   }
   $self->{params}{query}{api} = $self->{setting}{api};
+
+  $self->{params}{url} = undef;
+  try {
+    # Create URL for SELECT
+    $self->{params}{url} = sprintf(
+      "%s/indexes/%s/docs/search?api-version=%s",
+      $self->{setting}{base},
+      $self->{setting}{index},
+      $self->{setting}{api},
+    );
+  } catch {
+    carp "cant't create request url for SELECT. detail : $_";
+  }
+
 }
 
 sub insert {
