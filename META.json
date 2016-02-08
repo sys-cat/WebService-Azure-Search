@@ -42,10 +42,12 @@
       },
       "runtime" : {
          "requires" : {
+            "Class::Accessor::Lite" : "0",
             "HTTP::Headers" : "0",
             "HTTP::Request" : "0",
             "JSON" : "0",
             "LWP::UserAgent" : "0",
+            "URI" : "0",
             "perl" : "5.008001"
          }
       },

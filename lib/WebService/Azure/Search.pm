@@ -2,6 +2,7 @@ package WebService::Azure::Search;
 use 5.008001;
 use strict;
 use warnings;
+use utf8;
 
 use Class::Accessor::Lite (
   new => 0,
@@ -62,7 +63,8 @@ sub _init {
     carp "can't create request url.detail : $_";
   };
 }
-# select, insert, update, delete　のメソッドはパラメーターを作るだけ
+
+# select, insert, update, delete Method only make parameters.
 sub select {
   my ($self, %params) = @_;
   my $params = bless {%params};
@@ -118,12 +120,34 @@ sub delete {
   $self->{params}{query}{api} = $self->{setting}{api};
 }
 
-# 最終的なリクエストは run に任せる
-# run はHTTPリクエストして返すだけ
-sub run {
+# Only create uri statement.
+sub create_uri {
   my ($self) = @_;
   my $uri = URI->new($self->{params}{url});
   $uri->query_form($self->{params}{query});
+  return $uri;
+}
+
+# Only http request.
+sub run {
+  try {
+    my ($self) = @_;
+    my $uri = $self->create_uri;
+    my $ua = LWP::UserAgent->new;
+    my $req = HTTP::Request->new('POST' => $uri);
+    my $res = $ua->request($req);
+
+    return {
+      code    => $res->status_line,
+      error   => $res->is_error,
+      content => JSON->new->decode(Encode::encode_utf8($res->content)),
+    };
+  } catch {
+    return {
+      error    => $res->is_error,
+      content  => JSON->new->decode(Encode::encode_utf8($res->content)),
+    };
+  }
 }
 
 1;
@@ -138,11 +162,28 @@ WebService::Azure::Search - It's new $module
 =head1 SYNOPSIS
 
     use WebService::Azure::Search;
-    my $azure = WebServise::Azure::Search->new({});
+    # new Azure::Search
+    my $azure = WebServise::Azure::Search->new({
+      service => 'SERVICENAME',
+      index   => 'INDEXNAME',
+      api     => 'APIKEY',
+      admin   => 'ADMINKEY',
+    });
+    # Select AzureSearch
+    my $select = $azure->select({
+      search        => 'SEARCHSTRING',
+      searchMode    => 'any',
+      searchFields  => 'FIELDNAME',
+      count         => 'BOOL',
+    });
+    $select->run; # run Select Statement
+    # Insert or Update or Delete
+    my $insert = $azure->insert(@values);
+    $insert->run;
 
 =head1 DESCRIPTION
 
-WebService::Azure::Search is ...
+WebService::Azure::Search is perform DML against AzureSearch.
 
 =head1 LICENSE
 
