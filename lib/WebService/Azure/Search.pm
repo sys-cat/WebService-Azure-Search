@@ -82,7 +82,7 @@ sub select {
   }
   $self->{params}{query}{searchFields} = undef;
   if ($params->{searchFields}) {
-    $self->{params}{query}{searchFields} = join(@$params->{searchFields}, ",");
+    $self->{params}{query}{searchFields} = join($params->{searchFields}, ",");
   }
   $self->{params}{query}{count} = "false";
   if ($params->{count}) {
