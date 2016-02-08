@@ -9,7 +9,7 @@ use Class::Accessor::Lite (
   rw => [qw/_init query/]
 );
 
-use JSON:
+use JSON;
 use HTTP::Request;
 use HTTP::Headers;
 use LWP::UserAgent;
@@ -144,10 +144,8 @@ sub run {
       content => JSON->new->decode(Encode::encode_utf8($res->content)),
     };
   } catch {
-    return {
-      error    => $res->is_error,
-      content  => JSON->new->decode(Encode::encode_utf8($res->content)),
-    };
+    carp "can't access AzureSearch.detail: $_";
+    return {};
   }
 }
 
