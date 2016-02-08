@@ -102,7 +102,7 @@ sub select {
   } catch {
     carp "cant't create request url for SELECT. detail : $_";
   }
-
+  return $self;
 }
 
 sub insert {
