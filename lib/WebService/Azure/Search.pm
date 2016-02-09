@@ -91,7 +91,7 @@ sub select {
   $self->{params}{query}{api} = $self->{setting}{api};
 
   $self->{params}{url} = undef;
-  #try {
+  try {
     # Create URL for SELECT
     $self->{params}{url} = sprintf(
       "%s/indexes/%s/docs/search?api-version=%s",
@@ -99,9 +99,9 @@ sub select {
       $self->{setting}{index},
       $self->{setting}{api},
     );
-    #} catch {
-    #  carp "cant't create request url for SELECT. detail : $_";
-    #}
+  } catch {
+    carp "cant't create request url for SELECT. detail : $_";
+  };
   return $self;
 }
 
