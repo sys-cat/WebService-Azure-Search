@@ -6,19 +6,19 @@ WebService::Azure::Search - It's new $module
 
     use WebService::Azure::Search;
     # new Azure::Search
-    my $azure = WebServise::Azure::Search->new({
+    my $azure = WebServise::Azure::Search->new(
       service => 'SERVICENAME',
       index   => 'INDEXNAME',
       api     => 'APIKEY',
       admin   => 'ADMINKEY',
-    });
+    );
     # Select AzureSearch
-    my $select = $azure->select({
+    my $select = $azure->select(
       search        => 'SEARCHSTRING',
       searchMode    => 'any',
       searchFields  => 'FIELDNAME',
       count         => 'BOOL',
-    });
+    );
     $select->run; # run Select Statement
     # Insert or Update or Delete
     my $insert = $azure->insert(@values);

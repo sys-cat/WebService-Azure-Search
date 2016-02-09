@@ -16,12 +16,9 @@ use LWP::UserAgent;
 use URI;
 use Try::Tiny;
 use Carp;
+use Data::Dumper;
 
 our $VERSION = "0.01";
-our $SELECT = "select";
-our $INPUT = "input";
-our $UPDATE = "update";
-our $DELETE = "delete";
 
 sub new {
   my ($class, %opts) = @_;
@@ -33,7 +30,7 @@ sub _init {
   my ($self) = @_;
   $self->{setting}{base} = undef;
   if ($self->{service}) {
-    $self->{setting}{base} = sprintf("https://%s.search.windows.net/", $self->{service});
+    $self->{setting}{base} = sprintf("https://%s.search.windows.net", $self->{service});
   }
 
   $self->{setting}{index} = undef;
@@ -82,13 +79,14 @@ sub select {
   }
   $self->{params}{query}{searchFields} = undef;
   if ($params->{searchFields}) {
-    $self->{params}{query}{searchFields} = join($params->{searchFields}, ",");
+    $self->{params}{query}{searchFields} = $params->{searchFields};
   }
   $self->{params}{query}{count} = "false";
   if ($params->{count}) {
     $self->{params}{query}{count} = $params->{count};
   }
   $self->{params}{query}{api} = $self->{setting}{api};
+  $self->{params}{query}{admin} = $self->{setting}{admin};
 
   $self->{params}{url} = undef;
   try {
@@ -135,10 +133,18 @@ sub create_uri {
 sub run {
   try {
     my ($self) = @_;
-    my $uri = $self->create_uri;
+    #my $uri = $self->create_uri;
+    my $uri = URI->new($self->{params}{url});
+    $uri->query_form($self->{params}{query});
     my $ua = LWP::UserAgent->new;
-    my $req = HTTP::Request->new('POST' => $uri);
+    my $req = HTTP::Request->new('POST' => $self->{params}{url});
+    $req->content_type('application/json');
+    print "\n";
+    print Dumper($req);
+    print "\n";
     my $res = $ua->request($req);
+    print Dumper($res);
+    print "\n";
 
     return {
       code    => $res->status_line,
@@ -164,19 +170,19 @@ WebService::Azure::Search - It's new $module
 
     use WebService::Azure::Search;
     # new Azure::Search
-    my $azure = WebServise::Azure::Search->new({
+    my $azure = WebServise::Azure::Search->new(
       service => 'SERVICENAME',
       index   => 'INDEXNAME',
       api     => 'APIKEY',
       admin   => 'ADMINKEY',
-    });
+    );
     # Select AzureSearch
-    my $select = $azure->select({
+    my $select = $azure->select(
       search        => 'SEARCHSTRING',
       searchMode    => 'any',
       searchFields  => 'FIELDNAME',
       count         => 'BOOL',
-    });
+    );
     $select->run; # run Select Statement
     # Insert or Update or Delete
     my $insert = $azure->insert(@values);
