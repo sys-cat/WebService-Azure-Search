@@ -87,7 +87,7 @@ sub select {
   if ($params->{count}) {
     $self->{params}{query}{count} = $params->{count};
   }
-  $self->{params}{query}{api} = $self->{setting}{api};
+  $self->{params}{query}{'api-version'} = $self->{setting}{api};
   $self->{params}{query}{admin} = $self->{setting}{admin};
 
   $self->{params}{url} = undef;
@@ -141,6 +141,7 @@ sub run {
     my $ua = LWP::UserAgent->new;
     my $req = HTTP::Request->new('POST' => $self->{params}{url});
     $req->content_type('application/json');
+    $req->header('api-key' => $self->{setting}{admin});
     $req->content($query->stringify);
     my $res = $ua->request($req);
     print $res->as_string;
