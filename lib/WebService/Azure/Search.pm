@@ -143,6 +143,7 @@ sub run {
     $req->content_type('application/json');
     $req->content($query->stringify);
     my $res = $ua->request($req);
+    print $res->as_string;
     return $res->content;
   } catch {
     carp "can't access AzureSearch.detail: $_";
