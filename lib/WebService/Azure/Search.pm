@@ -134,11 +134,12 @@ sub create_uri {
 # Only http request.
 sub run {
   my ($self) = @_;
+  my $bless_query = $self->{params}{query};
   try {
-    my $hashref = {%$self->{params}{query}};
+    my $hashref = {%$bless_query};
     my $query = URI::Query->new(%$hashref);
     my $ua = LWP::UserAgent->new;
-    my $req = $ua->new('POST' => $self->{params}{url});
+    my $req = HTTP::Request->new('POST' => $self->{params}{url});
     $req->content_type('application/json');
     $req->content($query);
     my $res = $ua->request($req);
