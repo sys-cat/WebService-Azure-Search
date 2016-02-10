@@ -52,6 +52,7 @@
             "LWP::UserAgent" : "0",
             "Try::Tiny" : "0",
             "URI" : "0",
+            "URI::Query" : "0",
             "perl" : "5.008001"
          }
       },

@@ -14,8 +14,10 @@ use HTTP::Request;
 use HTTP::Headers;
 use LWP::UserAgent;
 use URI;
+use URI::Query;
 use Try::Tiny;
 use Carp;
+use Encode 'encode';
 use Data::Dumper;
 
 our $VERSION = "0.01";
@@ -131,26 +133,16 @@ sub create_uri {
 
 # Only http request.
 sub run {
+  my ($self) = @_;
   try {
-    my ($self) = @_;
-    #my $uri = $self->create_uri;
-    my $uri = URI->new($self->{params}{url});
-    $uri->query_form($self->{params}{query});
+    my $hashref = {%$self->{params}{query}};
+    my $query = URI::Query->new(%$hashref);
     my $ua = LWP::UserAgent->new;
-    my $req = HTTP::Request->new('POST' => $self->{params}{url});
+    my $req = $ua->new('POST' => $self->{params}{url});
     $req->content_type('application/json');
-    print "\n";
-    print Dumper($req);
-    print "\n";
+    $req->content($query);
     my $res = $ua->request($req);
-    print Dumper($res);
-    print "\n";
-
-    return {
-      code    => $res->status_line,
-      error   => $res->is_error,
-      content => JSON->new->decode(Encode::encode_utf8($res->content)),
-    };
+    return $res->content;
   } catch {
     carp "can't access AzureSearch.detail: $_";
     return {};
