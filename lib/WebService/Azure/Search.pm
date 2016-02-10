@@ -141,7 +141,7 @@ sub run {
     my $ua = LWP::UserAgent->new;
     my $req = HTTP::Request->new('POST' => $self->{params}{url});
     $req->content_type('application/json');
-    $req->content($query);
+    $req->content($query->stringify);
     my $res = $ua->request($req);
     return $res->content;
   } catch {
