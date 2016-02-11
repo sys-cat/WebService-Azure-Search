@@ -44,7 +44,6 @@
          "requires" : {
             "Carp" : "0",
             "Class::Accessor::Lite" : "0",
-            "Data::Dumper" : "0",
             "HTTP::Headers" : "0",
             "HTTP::Request" : "0",
             "JSON" : "0",
@@ -65,7 +64,8 @@
    "release_status" : "unstable",
    "resources" : {
       "repository" : {
-         "url" : "ssh://sys_cat@git_550909:29418/sys_cat/WebService-Azure-Search.git"
+         "type" : "git",
+         "url" : "git://github/sys-cat/WebService-Azure-Search.git"
       }
    },
    "version" : "0.01",

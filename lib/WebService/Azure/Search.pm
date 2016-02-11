@@ -6,7 +6,6 @@ use utf8;
 
 use Class::Accessor::Lite (
   new => 0,
-  #rw => [qw/_init query/]
 );
 
 use JSON;
@@ -14,11 +13,10 @@ use HTTP::Request;
 use HTTP::Headers;
 use LWP::UserAgent;
 use URI;
-use URI::Query;
 use Try::Tiny;
 use Carp;
 use Encode 'encode';
-use Data::Dumper;
+use JSON;
 
 our $VERSION = "0.01";
 
@@ -87,8 +85,6 @@ sub select {
   if ($params->{count}) {
     $self->{params}{query}{count} = $params->{count};
   }
-  $self->{params}{query}{'api-version'} = $self->{setting}{api};
-  $self->{params}{query}{admin} = $self->{setting}{admin};
 
   $self->{params}{url} = undef;
   try {
@@ -137,15 +133,13 @@ sub run {
   my $bless_query = $self->{params}{query};
   try {
     my $hashref = {%$bless_query};
-    my $query = URI::Query->new(%$hashref);
+    my $json_query = JSON->new->encode($hashref);
     my $ua = LWP::UserAgent->new;
     my $req = HTTP::Request->new('POST' => $self->{params}{url});
     $req->content_type('application/json');
     $req->header('api-key' => $self->{setting}{admin});
-    $req->content($query->stringify);
-    my $res = $ua->request($req);
-    print $res->as_string;
-    return $res->content;
+    $req->content($json_query);
+    return JSON->new->utf8->decode($ua->request($req)->content);
   } catch {
     carp "can't access AzureSearch.detail: $_";
     return {};
@@ -178,7 +172,7 @@ WebService::Azure::Search - It's new $module
       searchFields  => 'FIELDNAME',
       count         => 'BOOL',
     );
-    $select->run; # run Select Statement
+    $select->run; # run Select Statement. return to hash reference.
     # Insert or Update or Delete
     my $insert = $azure->insert(@values);
     $insert->run;

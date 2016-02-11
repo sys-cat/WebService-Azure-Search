@@ -19,7 +19,7 @@ WebService::Azure::Search - It's new $module
       searchFields  => 'FIELDNAME',
       count         => 'BOOL',
     );
-    $select->run; # run Select Statement
+    $select->run; # run Select Statement. return to hash reference.
     # Insert or Update or Delete
     my $insert = $azure->insert(@values);
     $insert->run;

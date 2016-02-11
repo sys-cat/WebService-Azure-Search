@@ -9,7 +9,7 @@ requires 'URI::Query';
 requires 'Class::Accessor::Lite';
 requires 'Try::Tiny';
 requires 'Carp';
-requires 'Data::Dumper';
+requires 'JSON';
 
 on 'test' => sub {
     requires 'Test::More', '0.98';
