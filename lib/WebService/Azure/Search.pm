@@ -99,21 +99,24 @@ sub select {
 
 sub insert {
   my ($self, $params) = @_;
-  print Dumper($params);
   $self->{params}{query}{value} = $params;
+  foreach my $value ($self->{params}{query}{value}) {
+    $value->{'@search.action'} = 'upload';
+  }
+  print Dumper($self->{params}{query}{value});
   return $self;
 }
 
 sub update {
-  my ($self, @params) = @_;
-  $self->{params}{query}{value} = @params;
-  $self->{params}{query}{api} = $self->{setting}{api};
+  my ($self, $params) = @_;
+  $self->{params}{query}{value} = $params;
+  return $self;
 }
 
 sub delete {
-  my ($self, @params) = @_;
-  $self->{params}{query}{value} = @params;
-  $self->{params}{query}{api} = $self->{setting}{api};
+  my ($self, $params) = @_;
+  $self->{params}{query}{value} = $params;
+  return $self;
 }
 
 # Only create uri statement.
@@ -139,7 +142,7 @@ sub run {
     return JSON->new->utf8->decode($ua->request($req)->content);
   } catch {
     carp "can't access AzureSearch.detail: $_";
-    return {};
+    return undef;
   }
 }
 
