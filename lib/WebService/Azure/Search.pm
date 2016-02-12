@@ -4,10 +4,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Class::Accessor::Lite (
-  new => 0,
-);
-
 use JSON;
 use HTTP::Request;
 use HTTP::Headers;
@@ -16,7 +12,6 @@ use URI;
 use Try::Tiny;
 use Carp;
 use Encode 'encode';
-use JSON;
 
 our $VERSION = "0.01";
 
@@ -102,9 +97,8 @@ sub select {
 }
 
 sub insert {
-  my ($self, @params) = @_;
-  $self->{params}{query}{value} = @params;
-  $self->{params}{query}{api} = $self->{setting}{api};
+  my ($self, %params) = @_;
+  $self->{params}{query}{value} = %params;
 }
 
 sub update {
@@ -165,7 +159,7 @@ WebService::Azure::Search - It's new $module
       api     => 'APIKEY',
       admin   => 'ADMINKEY',
     );
-    # Select AzureSearch
+    # Select AzureSearch.Support 'search', 'searchMode', 'searchFields', 'count' contexts.
     my $select = $azure->select(
       search        => 'SEARCHSTRING',
       searchMode    => 'any',
@@ -174,7 +168,7 @@ WebService::Azure::Search - It's new $module
     );
     $select->run; # run Select Statement. return to hash reference.
     # Insert or Update or Delete
-    my $insert = $azure->insert(@values);
+    my $insert = $azure->insert(%values); # default '@search.action' is upload.
     $insert->run;
 
 =head1 DESCRIPTION
