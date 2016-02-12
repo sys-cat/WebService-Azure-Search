@@ -43,6 +43,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
+            "Data::Dumper" : "0",
             "HTTP::Headers" : "0",
             "HTTP::Request" : "0",
             "JSON" : "0",

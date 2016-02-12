@@ -12,6 +12,7 @@ use URI;
 use Try::Tiny;
 use Carp;
 use Encode 'encode';
+use Data::Dumper;
 
 our $VERSION = "0.01";
 
@@ -98,7 +99,7 @@ sub select {
 
 sub insert {
   my ($self, @params) = @_;
-  print @params;
+  print Dumper(@params);
   my $set_value = {value => @params};
   $self->{params}{query}{value} = %$set_value;
 }
