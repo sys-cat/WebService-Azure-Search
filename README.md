@@ -6,23 +6,32 @@ WebService::Azure::Search - It's new $module
 
     use WebService::Azure::Search;
     # new Azure::Search
-    my $azure = WebServise::Azure::Search->new(
+    my $a_select = WebServise::Azure::Search->new(
       service => 'SERVICENAME',
       index   => 'INDEXNAME',
       api     => 'APIKEY',
       admin   => 'ADMINKEY',
     );
     # Select AzureSearch.Support 'search', 'searchMode', 'searchFields', 'count' contexts.
-    my $select = $azure->select(
+    my $select = $a_select->select(
       search        => 'SEARCHSTRING',
       searchMode    => 'any',
       searchFields  => 'FIELDNAME',
       count         => 'BOOL',
     );
     $select->run; # run Select Statement. return to hash reference.
-    # Insert or Update or Delete
-    my $insert = $azure->insert(%values); # default '@search.action' is upload.
-    $insert->run;
+    # Run Insert request
+    my $a_insert = WebService::Azure::Search->new(.....);
+    my $insert = $a_insert->insert(@values); # '@search.action' statement is 'upload'.
+    my $insert_result = $insert->run; # return hash reference.
+    # Run Update request
+    my $a_update = WebService::Azure::Search->new(.....);
+    my $update = $a_update->update(@values); # '@search.action' statement is 'merge'.
+    my $update_result = $update->run; # return hash reference.
+    # Run Delete request
+    my $a_delete = WebService::Azure::Search->new(.....);
+    my $delete = $a_delete->delete(@values); # '@search.action' statement is 'delete'.
+    my $delete_result = $delete->run; # return hash reference.
 
 # DESCRIPTION
 
