@@ -98,9 +98,10 @@ sub select {
 }
 
 sub insert {
-  my ($self, %params) = @_;
-  print Dumper(%params);
-  $self->{params}{query}{value} = %params;
+  my ($self, $params) = @_;
+  print Dumper($params);
+  $self->{params}{query}{value} = $params;
+  return $self;
 }
 
 sub update {
