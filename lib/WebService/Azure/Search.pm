@@ -99,7 +99,7 @@ sub select {
 
 sub insert {
   my ($self, $params) = @_;
-  for(my $count=0;$count<scalar($params);$count++) {
+  for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'upload';
   }
   $self->{params}{query}{value} = $params;
