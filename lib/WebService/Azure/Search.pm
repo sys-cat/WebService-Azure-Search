@@ -99,10 +99,10 @@ sub select {
 
 sub insert {
   my ($self, $params) = @_;
-  $self->{params}{query}{value} = $params;
-  foreach my $value ($self->{params}{query}{value}) {
-    $value->{'@search.action'} = 'upload';
+  for(my $count=0;$count<scalar($params);$count++) {
+    $params->[$count]->{'@search.action'} = 'upload';
   }
+  $self->{params}{query}{value} = $params;
   print Dumper($self->{params}{query}{value});
   return $self;
 }
