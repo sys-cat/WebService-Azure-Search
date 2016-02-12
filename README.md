@@ -12,7 +12,7 @@ WebService::Azure::Search - It's new $module
       api     => 'APIKEY',
       admin   => 'ADMINKEY',
     );
-    # Select AzureSearch
+    # Select AzureSearch.Support 'search', 'searchMode', 'searchFields', 'count' contexts.
     my $select = $azure->select(
       search        => 'SEARCHSTRING',
       searchMode    => 'any',
@@ -21,7 +21,7 @@ WebService::Azure::Search - It's new $module
     );
     $select->run; # run Select Statement. return to hash reference.
     # Insert or Update or Delete
-    my $insert = $azure->insert(@values);
+    my $insert = $azure->insert(%values); # default '@search.action' is upload.
     $insert->run;
 
 # DESCRIPTION

@@ -99,7 +99,7 @@ sub select {
 sub insert {
   my ($self, @params) = @_;
   my $set_value = {value => @params};
-  $self->{params}{query}{value} = %$set_values;
+  $self->{params}{query}{value} = %$set_value;
 }
 
 sub update {
