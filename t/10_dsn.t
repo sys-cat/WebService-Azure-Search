@@ -20,3 +20,5 @@ subtest new => sub {
   is $new->{params}{accept}, "application/json";
   is $new->{params}{url}, "https://service.search.windows.net/indexes/index/docs/index?api-version=api";
 };
+
+done_testing;
