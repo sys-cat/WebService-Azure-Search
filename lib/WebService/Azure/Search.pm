@@ -62,6 +62,8 @@ sub _init {
 # select, insert, update, delete Method only make parameters.
 sub select {
   my ($self, %params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   my $params = bless {%params};
 
   # Set value
@@ -99,6 +101,8 @@ sub select {
 
 sub insert {
   my ($self, $params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'upload';
   }
@@ -109,6 +113,8 @@ sub insert {
 
 sub update {
   my ($self, $params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'merge';
   }
@@ -118,6 +124,8 @@ sub update {
 
 sub delete {
   my ($self, $params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'delete';
   }
