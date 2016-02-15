@@ -35,7 +35,7 @@ subtest insert => sub {
     rid => 'test',
   );
   isa_ok $insert, "HASH";
-  my $query = $select->{params}{query};
+  my $query = $insert->{params}{query};
   is $query->{'@search.action'}, 'upload';
   is $query->{id}, '1';
   is $query->{rid}, 'test';
@@ -48,7 +48,7 @@ subtest update => sub {
     rid => 'test2',
   );
   isa_ok $update, "HASH";
-  my $query = $select->{params}{query};
+  my $query = $update->{params}{query};
   is $query->{'@search.action'}, 'merge';
   is $query->{id}, '1';
   is $query->{rid}, 'test2';
