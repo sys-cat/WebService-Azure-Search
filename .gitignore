@@ -29,3 +29,5 @@ cover_db/
 MYMETA.*
 
 /WebService-Azure-Search-*
+
+/example/
