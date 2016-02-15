@@ -67,4 +67,4 @@ subtest delete => sub {
   is $query->{rid}, 'test2';
 };
 
-done_testing;
+done_testing();
