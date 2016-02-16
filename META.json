@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module    ",
+   "abstract" : "Request Azure Search API",
    "author" : [
       "sys_cat <systemcat91@gmail.com>"
    ],

@@ -1,6 +1,6 @@
 # NAME
 
-WebService::Azure::Search - It's new $module    
+WebService::Azure::Search - Request Azure Search API
 
 <div>
     <a href='https://coveralls.io/github/sys-cat/WebService-Azure-Search?branch=master'><img src='https://coveralls.io/repos/github/sys-cat/WebService-Azure-Search/badge.svg?branch=master' alt='Coverage Status' /></a>

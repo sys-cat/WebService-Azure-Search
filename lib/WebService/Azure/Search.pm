@@ -12,7 +12,6 @@ use URI;
 use Try::Tiny;
 use Carp;
 use Encode 'encode';
-use Data::Dumper;
 
 our $VERSION = "0.01";
 
@@ -24,22 +23,25 @@ sub new {
 
 sub _init {
   my ($self) = @_;
-  $self->{setting}{base} = undef;
+  $self->{setting} = +{
+    base => undef,
+    index => undef,
+    api => undef,
+    admin => undef,
+  };
+
   if ($self->{service}) {
     $self->{setting}{base} = sprintf("https://%s.search.windows.net", $self->{service});
   }
 
-  $self->{setting}{index} = undef;
   if ($self->{index}) {
     $self->{setting}{index} = $self->{index};
   }
 
-  $self->{setting}{api} = undef;
   if ($self->{api}) {
     $self->{setting}{api} = $self->{api};
   }
 
-  $self->{setting}{admin} = undef;
   if ($self->{admin}) {
     $self->{setting}{admin} = $self->{admin};
   }
@@ -64,7 +66,7 @@ sub select {
   my ($self, %params) = @_;
   $self->{params} = {};
   $self = $self->_init($self->{setting});
-  my $params = bless {%params};
+  my $params = +{%params};
 
   # Set value
   $self->{params}{query}{search} = undef;
@@ -107,7 +109,6 @@ sub insert {
     $params->[$count]->{'@search.action'} = 'upload';
   }
   $self->{params}{query}{value} = $params;
-  print Dumper($self->{params}{query}{value});
   return $self;
 }
 
@@ -159,7 +160,7 @@ __END__
 
 =head1 NAME
 
-WebService::Azure::Search - It's new $module    
+WebService::Azure::Search - Request Azure Search API
 
 =begin html
 
