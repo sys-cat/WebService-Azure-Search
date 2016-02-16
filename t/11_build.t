@@ -10,9 +10,10 @@ my %init_params = (
   api => "api",
   admin => "admin",
 );
+my $azure = WebService::Azure::Search->new(%init_params);
 
 subtest select => sub {
-  my $azure = WebService::Azure::Search->new(%init_params);
+  #my $azure = WebService::Azure::Search->new(%init_params);
   my $select = $azure->select(
     search => "search strings",
     searchMode => "any",
@@ -29,7 +30,7 @@ subtest select => sub {
 };
 
 subtest insert => sub {
-  my $azure = WebService::Azure::Search->new(%init_params);
+  #my $azure = WebService::Azure::Search->new(%init_params);
   my $insert = $azure->insert([
       {
         id => '1',
@@ -44,7 +45,7 @@ subtest insert => sub {
 };
 
 subtest update => sub {
-  my $azure = WebService::Azure::Search->new(%init_params);
+  #my $azure = WebService::Azure::Search->new(%init_params);
   my $update = $azure->update([
       {
         id => '1',
@@ -59,7 +60,7 @@ subtest update => sub {
 };
 
 subtest delete => sub {
-  my $azure = WebService::Azure::Search->new(%init_params);
+  #my $azure = WebService::Azure::Search->new(%init_params);
   my $delete = $azure->delete([
       {
         id => '1',

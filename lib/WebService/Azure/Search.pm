@@ -62,6 +62,8 @@ sub _init {
 # select, insert, update, delete Method only make parameters.
 sub select {
   my ($self, %params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   my $params = bless {%params};
 
   # Set value
@@ -99,6 +101,8 @@ sub select {
 
 sub insert {
   my ($self, $params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'upload';
   }
@@ -109,6 +113,8 @@ sub insert {
 
 sub update {
   my ($self, $params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'merge';
   }
@@ -118,6 +124,8 @@ sub update {
 
 sub delete {
   my ($self, $params) = @_;
+  $self->{params} = {};
+  $self = $self->_init($self->{setting});
   for(my $count=0;$count<@$params;$count++) {
     $params->[$count]->{'@search.action'} = 'delete';
   }
@@ -159,14 +167,14 @@ WebService::Azure::Search - It's new $module
 
     use WebService::Azure::Search;
     # new Azure::Search
-    my $a_select = WebServise::Azure::Search->new(
+    my $azure = WebServise::Azure::Search->new(
       service => 'SERVICENAME',
       index   => 'INDEXNAME',
       api     => 'APIKEY',
       admin   => 'ADMINKEY',
     );
     # Select AzureSearch.Support 'search', 'searchMode', 'searchFields', 'count' contexts.
-    my $select = $a_select->select(
+    my $select = $azure->select(
       search        => 'SEARCHSTRING',
       searchMode    => 'any',
       searchFields  => 'FIELDNAME',
@@ -174,16 +182,13 @@ WebService::Azure::Search - It's new $module
     );
     $select->run; # run Select Statement. return to hash reference.
     # Run Insert request
-    my $a_insert = WebService::Azure::Search->new(.....);
-    my $insert = $a_insert->insert(@values); # '@search.action' statement is 'upload'.
+    my $insert = $azure->insert(@values); # '@search.action' statement is 'upload'.
     my $insert_result = $insert->run; # return hash reference.
     # Run Update request
-    my $a_update = WebService::Azure::Search->new(.....);
-    my $update = $a_update->update(@values); # '@search.action' statement is 'merge'.
+    my $update = $azure->update(@values); # '@search.action' statement is 'merge'.
     my $update_result = $update->run; # return hash reference.
     # Run Delete request
-    my $a_delete = WebService::Azure::Search->new(.....);
-    my $delete = $a_delete->delete(@values); # '@search.action' statement is 'delete'.
+    my $delete = $azure->delete(@values); # '@search.action' statement is 'delete'.
     my $delete_result = $delete->run; # return hash reference.
 
 =head1 DESCRIPTION
