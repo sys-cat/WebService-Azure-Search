@@ -12,7 +12,6 @@ use URI;
 use Try::Tiny;
 use Carp;
 use Encode 'encode';
-use Data::Dumper;
 
 our $VERSION = "0.01";
 
@@ -107,7 +106,6 @@ sub insert {
     $params->[$count]->{'@search.action'} = 'upload';
   }
   $self->{params}{query}{value} = $params;
-  print Dumper($self->{params}{query}{value});
   return $self;
 }
 
@@ -159,7 +157,15 @@ __END__
 
 =head1 NAME
 
-WebService::Azure::Search - It's new $module
+WebService::Azure::Search - It's new $module    
+
+=begin html
+
+<a href='https://coveralls.io/github/sys-cat/WebService-Azure-Search?branch=master'><img src='https://coveralls.io/repos/github/sys-cat/WebService-Azure-Search/badge.svg?branch=master' alt='Coverage Status' /></a>
+
+<a href='https://travis-ci.org/sys-cat/WebService-Azure-Search'><img src='https://travis-ci.org/sys-cat/WebService-Azure-Search.svg?branch=master' alt='Travis CI'></a>
+
+=end html
 
 =head1 SYNOPSIS
 
