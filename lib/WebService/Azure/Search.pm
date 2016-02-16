@@ -12,7 +12,6 @@ use URI;
 use Try::Tiny;
 use Carp;
 use Encode 'encode';
-use Data::Dumper;
 
 our $VERSION = "0.01";
 
@@ -107,7 +106,6 @@ sub insert {
     $params->[$count]->{'@search.action'} = 'upload';
   }
   $self->{params}{query}{value} = $params;
-  print Dumper($self->{params}{query}{value});
   return $self;
 }
 
