@@ -1,47 +1,49 @@
 # NAME
 
 WebService::Azure::Search - It's new $module    
-\[!\[Coverage Status\](https://coveralls.io/repos/github/sys-cat/WebService-Azure-Search/badge.svg?branch=master)\](https://coveralls.io/github/sys-cat/WebService-Azure-Search?branch=master)
 
-# SYNOPSIS
+<div>
+    # SYNOPSIS
 
-    use WebService::Azure::Search;
-    # new Azure::Search
-    my $azure = WebServise::Azure::Search->new(
-      service => 'SERVICENAME',
-      index   => 'INDEXNAME',
-      api     => 'APIKEY',
-      admin   => 'ADMINKEY',
-    );
-    # Select AzureSearch.Support 'search', 'searchMode', 'searchFields', 'count' contexts.
-    my $select = $azure->select(
-      search        => 'SEARCHSTRING',
-      searchMode    => 'any',
-      searchFields  => 'FIELDNAME',
-      count         => 'BOOL',
-    );
-    $select->run; # run Select Statement. return to hash reference.
-    # Run Insert request
-    my $insert = $azure->insert(@values); # '@search.action' statement is 'upload'.
-    my $insert_result = $insert->run; # return hash reference.
-    # Run Update request
-    my $update = $azure->update(@values); # '@search.action' statement is 'merge'.
-    my $update_result = $update->run; # return hash reference.
-    # Run Delete request
-    my $delete = $azure->delete(@values); # '@search.action' statement is 'delete'.
-    my $delete_result = $delete->run; # return hash reference.
+        use WebService::Azure::Search;
+        # new Azure::Search
+        my $azure = WebServise::Azure::Search->new(
+          service => 'SERVICENAME',
+          index   => 'INDEXNAME',
+          api     => 'APIKEY',
+          admin   => 'ADMINKEY',
+        );
+        # Select AzureSearch.Support 'search', 'searchMode', 'searchFields', 'count' contexts.
+        my $select = $azure->select(
+          search        => 'SEARCHSTRING',
+          searchMode    => 'any',
+          searchFields  => 'FIELDNAME',
+          count         => 'BOOL',
+        );
+        $select->run; # run Select Statement. return to hash reference.
+        # Run Insert request
+        my $insert = $azure->insert(@values); # '@search.action' statement is 'upload'.
+        my $insert_result = $insert->run; # return hash reference.
+        # Run Update request
+        my $update = $azure->update(@values); # '@search.action' statement is 'merge'.
+        my $update_result = $update->run; # return hash reference.
+        # Run Delete request
+        my $delete = $azure->delete(@values); # '@search.action' statement is 'delete'.
+        my $delete_result = $delete->run; # return hash reference.
 
-# DESCRIPTION
 
-WebService::Azure::Search is perform DML against AzureSearch.
+    # DESCRIPTION
 
-# LICENSE
+    WebService::Azure::Search is perform DML against AzureSearch.
 
-Copyright (C) sys\_cat.
+    # LICENSE
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+    Copyright (C) sys_cat.
 
-# AUTHOR
+    This library is free software; you can redistribute it and/or modify
+    it under the same terms as Perl itself.
 
-sys\_cat &lt;systemcat91@gmail.com>
+    # AUTHOR
+
+    sys_cat E<lt>systemcat91@gmail.comE<gt>
+</div>
