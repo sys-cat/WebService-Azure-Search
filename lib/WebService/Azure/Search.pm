@@ -162,8 +162,11 @@ __END__
 WebService::Azure::Search - It's new $module    
 
 =begin html
+
 <a href='https://coveralls.io/github/sys-cat/WebService-Azure-Search?branch=master'><img src='https://coveralls.io/repos/github/sys-cat/WebService-Azure-Search/badge.svg?branch=master' alt='Coverage Status' /></a>
+
 <a href='https://travis-ci.org/sys-cat/WebService-Azure-Search'><img src='https://travis-ci.org/sys-cat/WebService-Azure-Search.svg?branch=master' alt='Travis CI'></a>
+
 =end html
 
 =head1 SYNOPSIS
