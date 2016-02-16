@@ -151,7 +151,9 @@ __END__
 
 =head1 NAME
 
-WebService::Azure::Search - It's new $module
+WebService::Azure::Search - It's new $module    
+[![Coverage Status](https://coveralls.io/repos/github/sys-cat/WebService-Azure-Search/badge.svg?branch=master)](https://coveralls.io/github/sys-cat/WebService-Azure-Search?branch=master)
+
 
 =head1 SYNOPSIS
 
