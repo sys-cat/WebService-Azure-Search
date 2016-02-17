@@ -7,7 +7,6 @@ requires 'LWP::Protocol::https';
 requires 'URI';
 requires 'Try::Tiny';
 requires 'Carp';
-requires 'Data::Dumper';
 
 on 'test' => sub {
     requires 'Test::More', '0.98';
