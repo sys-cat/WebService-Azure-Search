@@ -85,6 +85,17 @@ sub select {
   if ($params->{count}) {
     $self->{params}{query}{count} = $params->{count};
   }
+  $self->{params}{query}{'$skip'} = 0; # default is 0
+  if ($params->{skip}) {
+    $self->{params}{query}{'$skip'} = $params->{params};
+  }
+  $self->{params}{query}{'$top'} = 50; # default is 50
+  if ($params->{top}) {
+    $self->{params}{query}{'$top'} = $params->{top};
+  }
+  if ($params->{filter}) { # filter is optional
+    $self->{params}{query}{'$filter'} = $params->{filter};
+  }
 
   $self->{params}{url} = undef;
   try {
