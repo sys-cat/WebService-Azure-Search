@@ -29,8 +29,8 @@ subtest select => sub {
   is $query->{searchMode}, "any";
   is $query->{searchFields}, "id, rid, sex";
   is $query->{count}, "true";
-  is $query->{'$skip'}, 0;
-  is $query->{'$top'}, 50;
+  is $query->{skip}, 0;
+  is $query->{top}, 50;
   is $query->{'$filter'}, "id eq 1";
   is $select->{params}{url}, "https://service.search.windows.net/indexes/index/docs/search?api-version=api";
 };

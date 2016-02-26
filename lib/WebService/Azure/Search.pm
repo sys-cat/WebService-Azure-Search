@@ -13,7 +13,7 @@ use Try::Tiny;
 use Carp;
 use Encode 'encode';
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 sub new {
   my ($class, %opts) = @_;
@@ -85,13 +85,13 @@ sub select {
   if ($params->{count}) {
     $self->{params}{query}{count} = $params->{count};
   }
-  $self->{params}{query}{'$skip'} = 0; # default is 0
+  $self->{params}{query}{skip} = 0; # default is 0
   if ($params->{skip}) {
-    $self->{params}{query}{'$skip'} = $params->{params};
+    $self->{params}{query}{skip} = $params->{params};
   }
-  $self->{params}{query}{'$top'} = 50; # default is 50
+  $self->{params}{query}{top} = 50; # default is 50
   if ($params->{top}) {
-    $self->{params}{query}{'$top'} = $params->{top};
+    $self->{params}{query}{top} = $params->{top};
   }
   if ($params->{filter}) { # filter is optional
     $self->{params}{query}{'$filter'} = $params->{filter};
