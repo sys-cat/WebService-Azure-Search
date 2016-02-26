@@ -87,7 +87,7 @@ sub select {
   }
   $self->{params}{query}{skip} = 0; # default is 0
   if ($params->{skip}) {
-    $self->{params}{query}{skip} = $params->{params};
+    $self->{params}{query}{skip} = $params->{skip};
   }
   $self->{params}{query}{top} = 50; # default is 50
   if ($params->{top}) {
