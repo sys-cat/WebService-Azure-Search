@@ -11,6 +11,10 @@ my %init_params = (
   admin => "admin",
 );
 
+subtest version => sub {
+  is $WebService::Azure::Search::VERSION, '0.03';
+};
+
 subtest new => sub {
   my $new = WebService::Azure::Search->new(%init_params);
   is $new->{setting}{base}, "https://service.search.windows.net";
