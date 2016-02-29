@@ -197,6 +197,9 @@ WebService::Azure::Search - Request Azure Search API
       searchMode    => 'any',
       searchFields  => 'FIELDNAME',
       count         => 'BOOL',
+      skip          => 0,
+      top           => 1,
+      filter        => 'OData Statement.'
     );
     $select->run; # run Select Statement. return to hash reference.
     # Run Insert request
