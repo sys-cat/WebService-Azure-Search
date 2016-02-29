@@ -180,6 +180,7 @@ WebService::Azure::Search - Request Azure Search API
 <a href='https://travis-ci.org/sys-cat/WebService-Azure-Search'><img src='https://travis-ci.org/sys-cat/WebService-Azure-Search.svg?branch=master' alt='Travis CI'></a>
 
 <a href='https://gitter.im/sys-cat/WebService-Azure-Search?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge'><img src='https://badges.gitter.im/sys-cat/WebService-Azure-Search.svg' alt='Gitter'></a>
+
 =end html
 
 =head1 SYNOPSIS
