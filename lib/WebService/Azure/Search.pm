@@ -13,7 +13,7 @@ use Try::Tiny;
 use Carp;
 use Encode 'encode';
 
-our $VERSION = "0.03";
+our $VERSION = "0.04";
 
 sub new {
   my ($class, %opts) = @_;
@@ -94,7 +94,7 @@ sub select {
     $self->{params}{query}{top} = $params->{top};
   }
   if ($params->{filter}) { # filter is optional
-    $self->{params}{query}{'$filter'} = $params->{filter};
+    $self->{params}{query}{filter} = $params->{filter};
   }
 
   $self->{params}{url} = undef;
