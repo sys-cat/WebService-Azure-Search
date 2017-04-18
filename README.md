@@ -1,5 +1,7 @@
 # NAME
 
+[![Join the chat at https://gitter.im/sys-cat/WebService-Azure-Search](https://badges.gitter.im/sys-cat/WebService-Azure-Search.svg)](https://gitter.im/sys-cat/WebService-Azure-Search?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 WebService::Azure::Search - Request Azure Search API
 
 <div>
